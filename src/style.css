@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #1f2937;
+    background-color: #f8fafc;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.font-script {
+  font-family: 'Caveat', 'Yellowtail', 'Pacifico', cursive;
+}
+
+.font-brand {
+  font-family: 'Pacifico', 'Caveat', cursive;
+}
+
+/* Custom scrollbar for categories and modals */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom golden yellow glows and badge styling */
+.text-gold {
+  color: #f59e0b;
+}
+
+.bg-gold {
+  background-color: #f59e0b;
+}
+
+.border-gold {
+  border-color: #f59e0b;
+}
+
+.bg-dark-hero {
+  background: radial-gradient(circle at 60% 40%, #1f2024 0%, #111215 80%);
+}
+
+.bg-dark-card {
+  background-color: #17181c;
+}
+
+/* Pulse animation for AI floating support */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Leaf decor effect */
+.leaf-shadow {
+  filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4));
+}

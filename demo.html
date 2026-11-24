@@ -1,0 +1,1650 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grill & Chill Restaurant - Delicious Food Good Mood</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Pacifico&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Yellowtail&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: '#f59e0b',
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+              script: ['Caveat', 'Yellowtail', 'Pacifico', 'cursive'],
+              brand: ['Pacifico', 'Caveat', 'cursive'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+  </head>
+  <body class="bg-[#0f1013] text-gray-800 antialiased selection:bg-amber-400 selection:text-black min-h-screen">
+    
+    <!-- CLIENT PRESENTATION TOOLBAR -->
+    <aside aria-label="Demo Viewport Switcher" class="bg-[#18191e] border-b border-white/10 text-xs text-gray-300 py-2 px-4 sticky top-0 z-50 flex items-center justify-between shadow-md">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-bold text-white tracking-wide">Client Demo Preview:</span>
+        <span class="text-gray-400 hidden sm:inline">Grill &amp; Chill Restaurant UI</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="view-desktop-btn" onclick="window.setViewMode('desktop')" class="px-3 py-1 rounded-full bg-[#f59e0b] text-black font-extrabold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer">
+          <i class="fa-solid fa-desktop"></i>
+          <span>Desktop View</span>
+        </button>
+        <button id="view-mobile-btn" onclick="window.setViewMode('mobile')" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold flex items-center gap-1.5 transition-all cursor-pointer">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <span>Mobile App Frame</span>
+        </button>
+        <button onclick="window.openCartDrawer()" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-amber-400 font-semibold cursor-pointer hidden md:flex items-center gap-1">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="demo-cart-total">$23.08</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- WRAPPER (Switches between Full Desktop and Centered Phone Mockup) -->
+    <div id="presentation-viewport" class="w-full transition-all duration-300 mx-auto">
+      
+      <!-- PHONE MOCKUP SHELL -->
+      <div id="phone-frame" class="w-full transition-all duration-300">
+        
+        <!-- STATUS BAR (For Mobile Frame) -->
+        <div id="phone-status-bar" class="hidden bg-[#0a0a0c] text-white px-6 pt-3 pb-2 flex items-center justify-between text-xs font-semibold select-none border-b border-white/5">
+          <span class="font-bold">9:41</span>
+          <div class="w-20 h-4 bg-black rounded-full mx-auto"></div>
+          <div class="flex items-center gap-2 text-[11px]">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <span class="flex items-center gap-1">
+              <span>87%</span>
+              <i class="fa-solid fa-battery-three-quarters text-emerald-400"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- APP SHELL CONTAINER -->
+        <div class="bg-white min-h-screen flex flex-col justify-between relative overflow-x-hidden shadow-2xl">
+
+          <!-- HEADER / NAVBAR -->
+          <header class="bg-[#0b0c0e] text-white sticky top-0 z-40 border-b border-white/5 shadow-xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center gap-2.5 group">
+                  <div class="w-11 h-11 rounded-full bg-black/60 border border-amber-400/40 flex items-center justify-center p-1.5 shadow-inner">
+                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                      <line x1="6" y1="17" x2="18" y2="17" stroke="#f59e0b" stroke-width="2.5"/>
+                      <line x1="9" y1="21" x2="9" y2="17"/>
+                      <line x1="15" y1="21" x2="15" y2="17"/>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-['Pacifico',cursive] text-2xl md:text-3xl font-bold tracking-wide text-white group-hover:text-amber-400 transition-colors">
+                      Grill &amp; Chill
+                    </span>
+                    <span class="text-[9px] tracking-[0.3em] text-gray-300 uppercase -mt-1 font-semibold">
+                      Restaurant
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav id="desktop-nav" class="hidden lg:flex items-center space-x-1.5 text-sm font-medium">
+                  <a href="#hero" class="px-5 py-1.5 rounded-full bg-[#f59e0b] text-black font-extrabold shadow-sm hover:bg-amber-300 transition-all">
+                    Home
+                  </a>
+                  <a href="#popular-foods" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all">
+                    Food
+                  </a>
+                  <a href="#categories" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all">
+                    Menu
+                  </a>
+                  <a href="#special-offer" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all">
+                    Offers
+                  </a>
+                  <button onclick="window.openOrdersModal()" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all cursor-pointer">
+                    My Order
+                  </button>
+                  <button onclick="window.openGiftModal()" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all cursor-pointer">
+                    Gift
+                  </button>
+                  <a href="#reviews" class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all">
+                    Reviews
+                  </a>
+
+                  <!-- More Dropdown -->
+                  <div class="relative group">
+                    <button class="px-3.5 py-1.5 rounded-full text-gray-200 hover:text-amber-400 hover:bg-white/5 transition-all flex items-center gap-1.5 cursor-pointer">
+                      <span>More</span>
+                      <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-44 bg-[#141518] border border-white/10 rounded-2xl shadow-2xl py-2 hidden group-hover:block transition-all z-50 backdrop-blur-md">
+                      <a href="#gallery" onclick="window.openGalleryModal()" class="block px-4 py-2 text-xs text-gray-300 hover:text-amber-400 hover:bg-white/5">Gallery</a>
+                      <a href="#contact" class="block px-4 py-2 text-xs text-gray-300 hover:text-amber-400 hover:bg-white/5">Contact</a>
+                      <a href="#about" class="block px-4 py-2 text-xs text-gray-300 hover:text-amber-400 hover:bg-white/5">About Us</a>
+                      <a href="#favorites" onclick="window.filterFavorites()" class="block px-4 py-2 text-xs text-gray-300 hover:text-amber-400 hover:bg-white/5">Favorites (<span id="fav-count">0</span>)</a>
+                    </div>
+                  </div>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center gap-3">
+                  <button id="cart-btn" onclick="window.openCartDrawer()" class="relative bg-[#f59e0b] hover:bg-amber-300 text-black font-bold px-4 py-1.5 rounded-full flex items-center gap-2 transition-all transform active:scale-95 shadow-md shadow-amber-500/20 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping text-sm"></i>
+                    <span class="text-xs font-extrabold">Cart</span>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#0b0c0e] shadow-sm">
+                      2
+                    </span>
+                  </button>
+
+                  <button id="mobile-menu-btn" onclick="window.toggleMobileMenu()" class="lg:hidden text-white p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-colors focus:outline-none" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Mobile Drawer Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-[#111215] border-t border-white/10 px-4 pt-3 pb-5 space-y-2">
+              <a href="#hero" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl bg-[#f59e0b] text-black font-bold text-xs">Home</a>
+              <a href="#popular-foods" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">Food</a>
+              <a href="#categories" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">Menu</a>
+              <a href="#special-offer" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">Offers</a>
+              <button onclick="window.openOrdersModal(); window.toggleMobileMenu()" class="w-full text-left px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">My Order</button>
+              <button onclick="window.openGiftModal(); window.toggleMobileMenu()" class="w-full text-left px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">Gift</button>
+              <a href="#reviews" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">Reviews</a>
+              <a href="#about" onclick="window.toggleMobileMenu()" class="block px-4 py-2 rounded-xl text-gray-200 hover:bg-white/5 text-xs">About Restaurant</a>
+            </div>
+          </header>
+
+
+          <!-- HERO SECTION -->
+          <section id="hero" class="relative bg-[#0d0e11] text-white overflow-hidden pt-4 pb-16 md:pb-24 border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                
+                <div class="lg:col-span-6 space-y-3 sm:space-y-4 text-center lg:text-left pt-2 md:pt-4">
+                  <div class="space-y-0.5">
+                    <p class="font-['Caveat',cursive] text-3xl sm:text-4xl md:text-5xl text-white font-medium tracking-wide">
+                      Delicious Food
+                    </p>
+                    <h1 class="font-['Caveat',cursive] text-5xl sm:text-6xl md:text-7xl font-bold text-[#f59e0b] drop-shadow-[0_4px_25px_rgba(245,158,11,0.45)] leading-tight">
+                      Good Mood!
+                    </h1>
+                  </div>
+
+                  <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-md mx-auto lg:mx-0 font-normal leading-relaxed">
+                    Fresh ingredients. Great taste.<br class="hidden sm:inline" />
+                    Always a better experience.
+                  </p>
+
+                  <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                    <a href="#popular-foods" class="bg-[#f59e0b] hover:bg-amber-300 text-black font-extrabold px-6 py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-2 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-amber-500/25">
+                      <span>Explore Menu</span>
+                      <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    
+                    <button onclick="window.openBookTableModal()" class="bg-[#18191d] hover:bg-[#23242b] text-white border border-white/20 font-semibold px-5 py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-2 transition-all cursor-pointer shadow-md">
+                      <i class="fa-regular fa-calendar-days text-[#f59e0b]"></i>
+                      <span>Book a Table</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Right Hero Visual -->
+                <div class="lg:col-span-6 relative flex justify-center mt-2 lg:mt-0">
+                  <div class="relative w-full max-w-md lg:max-w-xl group">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 group-hover:scale-[1.01] transition-transform duration-500">
+                      <img 
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" 
+                        alt="Delicious Gourmet Double Burger with Golden French Fries" 
+                        class="w-full h-64 sm:h-80 md:h-[380px] object-cover object-center filter contrast-105 brightness-105"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+
+          <!-- FLOATING SEARCH BAR -->
+          <section class="relative -mt-6 sm:-mt-8 z-30 px-4 max-w-4xl mx-auto w-full">
+            <div id="desktop-search-bar" class="hidden md:flex bg-white rounded-full shadow-2xl border border-gray-200/90 p-2 items-center justify-between gap-2 backdrop-blur-lg">
+              <div class="flex-1 relative flex items-center pl-4">
+                <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
+                <input 
+                  id="food-search-desktop"
+                  type="text" 
+                  placeholder="Search for delicious food..." 
+                  class="w-full pl-3 pr-10 py-2 text-sm text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none"
+                />
+                <button onclick="window.triggerSearch('desktop')" class="w-8 h-8 rounded-full bg-[#f59e0b] hover:bg-amber-300 text-black flex items-center justify-center transition-all cursor-pointer shadow-sm">
+                  <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </button>
+              </div>
+              <span class="text-gray-300 font-light text-lg select-none">|</span>
+              <button onclick="window.openBookTableModal()" class="flex items-center gap-2 px-5 py-2 text-xs font-bold text-gray-800 hover:text-amber-600 cursor-pointer">
+                <i class="fa-regular fa-calendar-days text-sm text-gray-700"></i>
+                <span>Book Table</span>
+              </button>
+              <span class="text-gray-300 font-light text-lg select-none">|</span>
+              <a href="#popular-foods" class="flex items-center gap-2 pr-6 pl-4 py-2 text-xs font-bold text-gray-800 hover:text-amber-600">
+                <i class="fa-solid fa-utensils text-sm text-gray-700"></i>
+                <span>Menu</span>
+              </a>
+            </div>
+
+            <div id="mobile-search-bar" class="flex md:hidden flex-col gap-2.5">
+              <div class="bg-white rounded-full shadow-xl border border-gray-200 p-1.5 flex items-center justify-between pl-4">
+                <div class="flex items-center gap-2.5 flex-1">
+                  <i class="fa-solid fa-magnifying-glass text-gray-400 text-xs"></i>
+                  <input 
+                    id="food-search-mobile"
+                    type="text" 
+                    placeholder="Search for delicious food..." 
+                    class="w-full py-1 text-xs text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none"
+                  />
+                </div>
+                <button onclick="window.triggerSearch('mobile')" class="w-8 h-8 rounded-full bg-[#f59e0b] text-black flex items-center justify-center cursor-pointer flex-shrink-0 shadow-sm">
+                  <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </button>
+              </div>
+              <div class="bg-white rounded-full shadow-md border border-gray-200 py-2 px-6 flex items-center justify-center gap-6 text-xs font-bold text-gray-800">
+                <button onclick="window.openBookTableModal()" class="flex items-center gap-2 hover:text-amber-600 cursor-pointer">
+                  <i class="fa-regular fa-calendar-days text-sm"></i>
+                  <span>Book Table</span>
+                </button>
+                <span class="text-gray-300 select-none">|</span>
+                <a href="#popular-foods" class="flex items-center gap-2 hover:text-amber-600">
+                  <i class="fa-solid fa-utensils text-sm"></i>
+                  <span>Menu</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- FOOD CATEGORIES -->
+          <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 w-full">
+            <div class="flex items-center justify-center mb-6 gap-3">
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#f59e0b]"></div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight text-center">
+                Food Categories
+              </h2>
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#f59e0b]"></div>
+            </div>
+
+            <div class="flex items-center justify-start sm:justify-center gap-3 sm:gap-5 lg:gap-7 overflow-x-auto pb-3 no-scrollbar px-1">
+              <button onclick="window.filterCategory('Pizza')" data-cat="Pizza" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=180&q=80" alt="Pizza" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Pizza</span>
+              </button>
+
+              <button onclick="window.filterCategory('Burger')" data-cat="Burger" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=180&q=80" alt="Burger" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Burger</span>
+              </button>
+
+              <button onclick="window.filterCategory('Pasta')" data-cat="Pasta" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281290?auto=format&fit=crop&w=180&q=80" alt="Pasta" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Pasta</span>
+              </button>
+
+              <button onclick="window.filterCategory('Kebab')" data-cat="Kebab" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=180&q=80" alt="Kebab" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Kebab</span>
+              </button>
+
+              <button onclick="window.filterCategory('BBQ')" data-cat="BBQ" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=180&q=80" alt="BBQ" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">BBQ</span>
+              </button>
+
+              <button onclick="window.filterCategory('Deserts')" data-cat="Deserts" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=180&q=80" alt="Deserts" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Deserts</span>
+              </button>
+
+              <button onclick="window.filterCategory('Drinks')" data-cat="Drinks" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=180&q=80" alt="Drinks" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Drinks</span>
+              </button>
+
+              <button onclick="window.filterCategory('Salad')" data-cat="Salad" class="category-pill group flex flex-col items-center flex-shrink-0 cursor-pointer focus:outline-none">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full p-0.5 bg-white border border-gray-200 group-hover:border-amber-400 group-hover:shadow-md transition-all transform group-hover:scale-105 overflow-hidden shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=180&q=80" alt="Salad" class="w-full h-full object-cover rounded-full" />
+                </div>
+                <span class="mt-1.5 text-xs font-semibold text-gray-700 group-hover:text-amber-500 transition-colors">Salad</span>
+              </button>
+            </div>
+          </section>
+
+
+          <!-- SPECIAL OFFER BANNER -->
+          <section id="special-offer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+            <div class="relative bg-gradient-to-r from-[#121316] via-[#1b1c20] to-[#0f1013] rounded-3xl p-5 sm:p-7 md:p-8 text-white overflow-hidden shadow-xl border border-white/10">
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                <div class="md:col-span-7 space-y-3">
+                  <div class="flex items-center gap-3 flex-wrap">
+                    <span class="font-['Caveat',cursive] text-2xl sm:text-3xl text-white">Special Offer</span>
+                    <div class="bg-[#f59e0b] text-black px-3 py-1 rounded-2xl flex flex-col items-center justify-center font-black shadow-md leading-tight">
+                      <span class="text-[9px] uppercase tracking-wider font-extrabold">Up to</span>
+                      <span class="text-lg leading-none font-black">50%</span>
+                      <span class="text-[8px] uppercase tracking-tighter">Get 50% OFF</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight">
+                      <span class="text-white">Good Food</span> <br/>
+                      <span class="text-[#f59e0b]">Great Discount!</span>
+                    </h3>
+                  </div>
+                  <div class="flex items-center gap-2 pt-1">
+                    <span class="w-5 h-1.5 rounded-full bg-[#f59e0b]"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+                  </div>
+                </div>
+
+                <div class="md:col-span-5 flex items-center justify-end gap-3 sm:gap-4">
+                  <div class="relative w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-amber-400/40 shadow-xl flex-shrink-0 group">
+                    <img 
+                      src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" 
+                      alt="Special Offer Pizza" 
+                      class="w-full h-full object-cover transform transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <button onclick="window.claimOffer()" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#f59e0b] hover:bg-amber-300 text-black flex items-center justify-center transition-all transform hover:scale-110 active:scale-95 cursor-pointer shadow-lg shadow-amber-500/30 flex-shrink-0" aria-label="Order Special Pizza">
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- POPULAR FOODS SECTION -->
+          <section id="popular-foods" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+            <div class="flex items-center justify-center mb-6 gap-3">
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#f59e0b]"></div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight text-center">
+                Popular Foods
+              </h2>
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#f59e0b]"></div>
+            </div>
+
+            <div id="filter-status" class="hidden items-center justify-between bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 mb-5">
+              <p class="text-xs text-amber-900 font-medium">Filtering by: <span id="current-filter-name" class="font-bold underline">Pizza</span></p>
+              <button onclick="window.resetCategoryFilter()" class="text-[11px] bg-[#f59e0b] hover:bg-amber-500 text-black font-bold px-3 py-0.5 rounded-full cursor-pointer">Show All</button>
+            </div>
+
+            <div id="foods-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+              
+              <!-- 1. Margherita Pizza -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Margherita Pizza" data-category="Pizza" data-price="12.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Margherita Pizza')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Margherita Pizza</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$12.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.8</span>
+                      <span class="text-gray-400">(2.5k)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Margherita Pizza', 12.99, 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Margherita Pizza')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Classic Burger -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Classic Burger" data-category="Burger" data-price="8.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=500&q=80" alt="Classic Burger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Classic Burger')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Classic Burger</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$8.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.7</span>
+                      <span class="text-gray-400">(1.8k)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Classic Burger', 8.99, 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Classic Burger')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Creamy Pasta -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Creamy Pasta" data-category="Pasta" data-price="10.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=500&q=80" alt="Creamy Pasta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Creamy Pasta')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Creamy Pasta</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$10.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.8</span>
+                      <span class="text-gray-400">(1.2k)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Creamy Pasta', 10.99, 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Creamy Pasta')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Grilled Kebab -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Grilled Kebab" data-category="Kebab" data-price="14.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=500&q=80" alt="Grilled Kebab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Grilled Kebab')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Grilled Kebab</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$14.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.9</span>
+                      <span class="text-gray-400">(1.5k)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Grilled Kebab', 14.99, 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Grilled Kebab')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. BBQ Chicken -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="BBQ Chicken" data-category="BBQ" data-price="13.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=500&q=80" alt="BBQ Chicken" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'BBQ Chicken')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">BBQ Chicken</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$13.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.8</span>
+                      <span class="text-gray-400">(1.1k)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('BBQ Chicken', 13.99, 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('BBQ Chicken')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Chocolate Cake -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Chocolate Cake" data-category="Deserts" data-price="6.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Chocolate Cake" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Chocolate Cake')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Chocolate Cake</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$6.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.7</span>
+                      <span class="text-gray-400">(900)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Chocolate Cake', 6.99, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Chocolate Cake')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Fresh Salad -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Fresh Salad" data-category="Salad" data-price="7.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80" alt="Fresh Salad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Fresh Salad')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Fresh Salad</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$7.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.6</span>
+                      <span class="text-gray-400">(800)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Fresh Salad', 7.99, 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Fresh Salad')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Mojito Drink -->
+              <div class="food-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group" data-title="Mojito Drink" data-category="Drinks" data-price="4.99">
+                <div class="relative overflow-hidden bg-gray-50 h-32 sm:h-44">
+                  <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" alt="Mojito Drink" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <button onclick="window.toggleWishlist(this, 'Mojito Drink')" class="wishlist-btn absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-red-500 shadow-sm transition-colors cursor-pointer" aria-label="Favorite">
+                    <i class="fa-regular fa-heart text-xs"></i>
+                  </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between space-y-2">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-1">
+                      <h3 class="font-bold text-gray-900 text-xs sm:text-sm truncate">Mojito Drink</h3>
+                      <span class="font-extrabold text-gray-900 text-xs sm:text-sm">$4.99</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-0.5 text-[11px] text-gray-500">
+                      <i class="fa-solid fa-star text-[#f59e0b]"></i>
+                      <span class="font-bold text-gray-800">4.7</span>
+                      <span class="text-gray-400">(700)</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                    <button onclick="window.addToCart('Mojito Drink', 4.99, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80')" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95 shadow-xs">
+                      <i class="fa-solid fa-cart-shopping text-[10px]"></i>
+                      <span>Online Order</span>
+                    </button>
+                    <button onclick="window.openOfflineModal('Mojito Drink')" class="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer active:scale-95">
+                      <i class="fa-solid fa-store text-[10px]"></i>
+                      <span>Offline Order</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="no-foods-found" class="hidden text-center py-12">
+              <i class="fa-solid fa-magnifying-glass text-3xl text-gray-400 mb-2"></i>
+              <h4 class="font-bold text-gray-800 text-sm">No dishes match your search</h4>
+              <button onclick="window.resetSearch()" class="mt-3 bg-[#f59e0b] hover:bg-amber-500 text-black font-bold text-xs px-4 py-1.5 rounded-full cursor-pointer">
+                View All Menu
+              </button>
+            </div>
+          </section>
+
+
+          <!-- ABOUT OUR RESTAURANT -->
+          <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+            <div class="bg-[#121316] text-white rounded-3xl overflow-hidden shadow-xl border border-white/10 grid grid-cols-1 lg:grid-cols-12 relative">
+              <div class="lg:col-span-5 h-56 sm:h-64 lg:h-auto min-h-[240px] relative overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=80" 
+                  alt="Restaurant interior" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+                />
+              </div>
+
+              <div class="lg:col-span-7 p-5 sm:p-7 lg:p-10 flex flex-col justify-center space-y-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-full bg-white/10 border border-amber-400/40 flex items-center justify-center p-1.5">
+                    <svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                      <line x1="6" y1="17" x2="18" y2="17" stroke="#f59e0b" stroke-width="2.5"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-lg sm:text-xl font-extrabold tracking-tight">
+                    About <span class="text-[#f59e0b]">Our Restaurant</span>
+                  </h3>
+                </div>
+
+                <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                  At Grill &amp; Chill, we serve the best food with love and passion. Our mission is to bring delicious meals, great ambience, and unforgettable moments to you.
+                </p>
+
+                <div class="pt-1">
+                  <button onclick="window.openAboutModal()" class="bg-[#f59e0b] hover:bg-amber-300 text-black font-extrabold px-5 py-2 rounded-full text-xs inline-flex items-center gap-2 cursor-pointer shadow-md">
+                    <span>Learn More</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- REVIEWS -->
+          <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+            <div class="flex items-center justify-center mb-6 gap-3">
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#f59e0b]"></div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight text-center">
+                Reviews
+              </h2>
+              <div class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#f59e0b]"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+              <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs flex items-center gap-3.5">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" alt="Hasan" class="w-12 h-12 rounded-full object-cover border border-amber-400 flex-shrink-0" />
+                <div class="space-y-0.5">
+                  <h4 class="font-bold text-gray-900 text-xs sm:text-sm leading-tight">Hasan Ahmed</h4>
+                  <div class="flex items-center text-[#f59e0b] text-[10px] gap-0.5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="text-[11px] text-gray-600 italic">“Amazing food and great service! Highly recommended.”</p>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs flex items-center gap-3.5">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt="Sara" class="w-12 h-12 rounded-full object-cover border border-amber-400 flex-shrink-0" />
+                <div class="space-y-0.5">
+                  <h4 class="font-bold text-gray-900 text-xs sm:text-sm leading-tight">Sara Khan</h4>
+                  <div class="flex items-center text-[#f59e0b] text-[10px] gap-0.5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="text-[11px] text-gray-600 italic">“The best restaurant in town! Loved it!”</p>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs flex items-center gap-3.5">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80" alt="Rafi" class="w-12 h-12 rounded-full object-cover border border-amber-400 flex-shrink-0" />
+                <div class="space-y-0.5">
+                  <h4 class="font-bold text-gray-900 text-xs sm:text-sm leading-tight">Rafi Islam</h4>
+                  <div class="flex items-center text-[#f59e0b] text-[10px] gap-0.5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="text-[11px] text-gray-600 italic">“Delicious food, fast service. Will visit again!”</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- LOCATION -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full">
+            <div class="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 text-lg">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm sm:text-base">Our Location</h4>
+                  <p class="text-xs text-gray-600">123 Food Street, Dhaka-1205</p>
+                </div>
+              </div>
+
+              <button onclick="window.openMapModal()" class="w-full sm:w-auto bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold px-5 py-2 rounded-full text-xs flex items-center justify-center gap-2 cursor-pointer shadow-xs">
+                <span>View on Map</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </section>
+
+
+          <!-- FOOTER -->
+          <footer id="contact" class="bg-[#0b0c0e] text-white pt-10 pb-16 md:pb-10 border-t border-white/10 mt-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-10">
+                <div class="lg:col-span-4 space-y-2">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center p-1.5 border border-amber-400/30">
+                      <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                        <line x1="6" y1="17" x2="18" y2="17" stroke="#f59e0b" stroke-width="2.5"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="font-['Pacifico',cursive] text-2xl font-bold tracking-wide text-white">Grill &amp; Chill</span>
+                      <p class="text-[9px] tracking-[0.25em] text-gray-400 uppercase font-semibold">Restaurant</p>
+                    </div>
+                  </div>
+                  <p class="font-['Caveat',cursive] text-xl text-[#f59e0b]">Eat Good. Feel Good.</p>
+                </div>
+
+                <div class="lg:col-span-3">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Quick Links</h4>
+                  <div class="grid grid-cols-2 gap-1.5 text-xs text-gray-400">
+                    <a href="#hero" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Home</a>
+                    <button onclick="window.openOrdersModal()" class="text-left hover:text-amber-400 flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> My Order</button>
+                    <a href="#popular-foods" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Menu</a>
+                    <button onclick="window.openGiftModal()" class="text-left hover:text-amber-400 flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Gift</button>
+                    <a href="#special-offer" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Offers</a>
+                    <a href="#reviews" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Reviews</a>
+                    <a href="#about" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> About Us</a>
+                    <a href="#contact" class="hover:text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-star text-[9px] text-amber-400"></i> Contact</a>
+                  </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Follow Us</h4>
+                  <div class="flex items-center gap-2">
+                    <a href="https://youtube.com" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center hover:scale-110 transition-transform" aria-label="YouTube"><i class="fa-brands fa-youtube text-xs"></i></a>
+                    <a href="https://telegram.org" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center hover:scale-110 transition-transform" aria-label="Telegram"><i class="fa-brands fa-telegram text-xs"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:scale-110 transition-transform" aria-label="Facebook"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                    <a href="https://messenger.com" target="_blank" rel="noreferrer" class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center hover:scale-110 transition-transform" aria-label="Messenger"><i class="fa-brands fa-facebook-messenger text-xs"></i></a>
+                  </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-2">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-white">Subscribe to Our Newsletter</h4>
+                  <form onsubmit="window.handleNewsletter(event)" class="relative flex items-center">
+                    <span class="absolute left-3 text-gray-400"><i class="fa-regular fa-envelope text-xs"></i></span>
+                    <input type="email" required placeholder="Enter your email..." class="w-full bg-[#18191d] border border-white/10 rounded-full pl-9 pr-11 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-amber-400" />
+                    <button type="submit" class="absolute right-1 w-7 h-7 rounded-full bg-[#f59e0b] hover:bg-amber-300 text-black flex items-center justify-center cursor-pointer shadow-xs" aria-label="Subscribe">
+                      <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="border-t border-white/5 mt-8 pt-5 text-center text-xs text-gray-500">
+                <p>© 2026 Grill &amp; Chill Restaurant. All rights reserved.</p>
+              </div>
+            </div>
+          </footer>
+
+
+          <!-- AI SUPPORT WIDGET -->
+          <div id="ai-support-container" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 flex flex-col items-end">
+            <div id="ai-support-card" class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-60 overflow-hidden mb-2.5 transition-all duration-300 transform scale-100 origin-bottom-right">
+              <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-600 text-white p-3 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-robot text-xs"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-bold leading-tight flex items-center gap-1.5">
+                      AI Support
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    </h5>
+                    <p class="text-[9px] text-blue-100">How can I help you?</p>
+                  </div>
+                </div>
+                <button onclick="window.toggleAISupportCard()" class="text-white/70 hover:text-white text-xs p-1" aria-label="Close">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+
+              <div class="divide-y divide-gray-100 text-xs">
+                <a href="mailto:support@grillchill.com" class="flex items-center gap-2.5 px-3 py-2 hover:bg-gray-50 text-gray-700">
+                  <i class="fa-regular fa-envelope text-blue-600 w-4"></i>
+                  <span>Email Us</span>
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 px-3 py-2 hover:bg-gray-50 text-gray-700">
+                  <i class="fa-brands fa-whatsapp text-emerald-600 w-4 text-sm"></i>
+                  <span>WhatsApp</span>
+                </a>
+                <a href="tel:+18005550199" class="flex items-center gap-2.5 px-3 py-2 hover:bg-gray-50 text-gray-700">
+                  <i class="fa-solid fa-phone text-blue-600 w-4"></i>
+                  <span>Call Us</span>
+                </a>
+                <button onclick="window.openAIChatModal()" class="w-full flex items-center gap-2.5 px-3 py-2 hover:bg-blue-50 text-blue-700 font-semibold cursor-pointer text-left">
+                  <i class="fa-solid fa-comments text-blue-600 w-4"></i>
+                  <span>Call Now</span>
+                </button>
+              </div>
+            </div>
+
+            <button 
+              id="ai-support-fab"
+              onclick="window.toggleAISupportCard()" 
+              class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-600 text-white shadow-xl shadow-blue-500/30 flex items-center justify-center transition-all transform hover:scale-110 active:scale-95 cursor-pointer border-2 border-white"
+              aria-label="AI Support"
+            >
+              <i class="fa-solid fa-headset text-base"></i>
+            </button>
+          </div>
+
+
+          <!-- MOBILE BOTTOM NAV -->
+          <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0b0c0e] text-gray-400 border-t border-amber-400/40 z-40 px-2 py-1.5 flex items-center justify-around shadow-2xl backdrop-blur-md">
+            <a href="#hero" class="flex flex-col items-center justify-center py-1 px-2 text-[#f59e0b]">
+              <i class="fa-solid fa-house text-base"></i>
+              <span class="text-[10px] font-bold mt-0.5 border-b-2 border-amber-400 pb-0.5">Home</span>
+            </a>
+            <a href="#popular-foods" class="flex flex-col items-center justify-center py-1 px-2 text-gray-300 hover:text-amber-400">
+              <i class="fa-solid fa-utensils text-base"></i>
+              <span class="text-[10px] font-medium mt-0.5">Menu</span>
+            </a>
+            <button onclick="window.openQRScannerModal()" class="flex flex-col items-center justify-center py-1 px-2 text-gray-300 hover:text-amber-400 cursor-pointer">
+              <i class="fa-solid fa-qrcode text-base"></i>
+              <span class="text-[9px] font-medium mt-0.5 leading-tight text-center">QR Code<br/>Scanner</span>
+            </button>
+            <button onclick="window.openOrdersModal()" class="flex flex-col items-center justify-center py-1 px-2 text-gray-300 hover:text-amber-400 cursor-pointer">
+              <i class="fa-solid fa-bag-shopping text-base"></i>
+              <span class="text-[10px] font-medium mt-0.5">My Order</span>
+            </button>
+            <button onclick="window.openGiftModal()" class="flex flex-col items-center justify-center py-1 px-2 text-gray-300 hover:text-amber-400 cursor-pointer">
+              <i class="fa-solid fa-gift text-base"></i>
+              <span class="text-[10px] font-medium mt-0.5">Gift</span>
+            </button>
+            <button onclick="window.toggleMobileMenu()" class="flex flex-col items-center justify-center py-1 px-2 text-gray-300 hover:text-amber-400 cursor-pointer">
+              <i class="fa-solid fa-bars text-base"></i>
+              <span class="text-[10px] font-medium mt-0.5">More</span>
+            </button>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div id="cart-drawer-backdrop" class="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm hidden transition-opacity duration-300 opacity-0" onclick="window.closeCartDrawer()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+      <div class="p-4 bg-[#0b0c0e] text-white flex items-center justify-between border-b border-white/10">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-cart-shopping text-[#f59e0b] text-base"></i>
+          <h3 class="font-bold text-base">Your Cart Items</h3>
+          <span id="drawer-item-count" class="bg-[#f59e0b] text-black text-[10px] font-black px-2 py-0.5 rounded-full">2 items</span>
+        </div>
+        <button onclick="window.closeCartDrawer()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white cursor-pointer" aria-label="Close">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div id="cart-items-list" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+
+      <div class="p-4 border-t border-gray-200 bg-gray-50 space-y-3">
+        <div class="space-y-1 text-xs text-gray-600">
+          <div class="flex justify-between"><span>Subtotal</span><span id="cart-subtotal" class="font-semibold text-gray-900">$21.98</span></div>
+          <div class="flex justify-between"><span>Delivery</span><span class="text-emerald-600 font-semibold">FREE</span></div>
+          <div class="flex justify-between"><span>Tax (5%)</span><span id="cart-tax" class="font-semibold text-gray-900">$1.10</span></div>
+          <div class="flex justify-between text-sm font-extrabold text-gray-900 pt-1.5 border-t border-gray-200">
+            <span>Total</span><span id="cart-total" class="text-amber-600 font-black">$23.08</span>
+          </div>
+        </div>
+
+        <button onclick="window.proceedToCheckout()" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-extrabold py-3 rounded-xl shadow-md cursor-pointer transition-transform active:scale-95 text-xs">
+          <span>Proceed to Checkout</span>
+          <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- BOOK A TABLE MODAL -->
+    <div id="book-table-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeBookTableModal()"></div>
+      <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 z-10">
+        <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center">
+              <i class="fa-regular fa-calendar-days text-sm"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-base text-gray-900">Book a Table</h3>
+              <p class="text-[11px] text-gray-500">Grill &amp; Chill Restaurant Reservation</p>
+            </div>
+          </div>
+          <button onclick="window.closeBookTableModal()" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 cursor-pointer">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+
+        <form onsubmit="window.handleReservation(event)" class="mt-4 space-y-3 text-xs">
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Date</label>
+              <input type="date" required value="2026-11-25" class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl" />
+            </div>
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Time</label>
+              <select class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl">
+                <option>07:00 PM (Dinner)</option>
+                <option>08:00 PM (Dinner)</option>
+                <option>01:00 PM (Lunch)</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Guests</label>
+              <select class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl">
+                <option>2 Persons</option>
+                <option>4 Persons</option>
+                <option>6 Persons</option>
+                <option>8+ Persons</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Area</label>
+              <select class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl">
+                <option>Main Dining</option>
+                <option>Rooftop Terrace</option>
+                <option>VIP Lounge</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Name</label>
+            <input type="text" required placeholder="Hasan Ahmed" class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl" />
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Phone</label>
+            <input type="tel" required placeholder="+880 1700-000000" class="w-full px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl" />
+          </div>
+          <button type="submit" class="w-full mt-2 bg-[#f59e0b] hover:bg-amber-300 text-black font-extrabold py-2.5 rounded-xl shadow-sm cursor-pointer">
+            Confirm Reservation
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- OFFLINE ORDER MODAL -->
+    <div id="offline-order-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeOfflineModal()"></div>
+      <div class="relative bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl border border-gray-100 z-10 text-xs">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-store text-amber-500 text-base"></i>
+            <h3 class="font-bold text-sm text-gray-900">Offline Order &amp; Dine-in</h3>
+          </div>
+          <button onclick="window.closeOfflineModal()" class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 cursor-pointer">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+
+        <div class="mt-3 space-y-2.5">
+          <p class="text-gray-600">Selected dish: <strong id="offline-item-title" class="text-gray-900">Classic Burger</strong></p>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="window.confirmOfflineOrder('Dine-in Table Service')" class="p-2.5 border border-gray-200 hover:border-amber-400 hover:bg-amber-50 rounded-xl text-left cursor-pointer">
+              <i class="fa-solid fa-utensils text-amber-500 mb-1"></i>
+              <p class="font-bold text-gray-800">Dine-in</p>
+              <p class="text-[10px] text-gray-500">Order to your table</p>
+            </button>
+            <button onclick="window.confirmOfflineOrder('Counter Takeaway')" class="p-2.5 border border-gray-200 hover:border-amber-400 hover:bg-amber-50 rounded-xl text-left cursor-pointer">
+              <i class="fa-solid fa-bag-shopping text-amber-500 mb-1"></i>
+              <p class="font-bold text-gray-800">Takeaway</p>
+              <p class="text-[10px] text-gray-500">Ready in 15 mins</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- AI CHAT BOT MODAL -->
+    <div id="ai-chat-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeAIChatModal()"></div>
+      <div class="relative bg-white rounded-3xl max-w-sm w-full h-[480px] flex flex-col shadow-2xl border border-gray-100 z-10 overflow-hidden">
+        <div class="p-3 bg-gradient-to-r from-blue-700 to-indigo-600 text-white flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
+              <i class="fa-solid fa-robot text-xs"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs">Chef Assistant AI</h4>
+              <p class="text-[9px] text-blue-100">Online • Grill &amp; Chill Support</p>
+            </div>
+          </div>
+          <button onclick="window.closeAIChatModal()" class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white cursor-pointer">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+
+        <div id="chat-messages" class="flex-1 p-3 overflow-y-auto space-y-2 text-xs bg-gray-50">
+          <div class="flex items-start gap-2">
+            <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-[9px]">AI</div>
+            <div class="bg-white p-2.5 rounded-2xl rounded-tl-none border border-gray-200 shadow-xs text-gray-700 max-w-[85%]">
+              Hello! 👋 Welcome to <strong>Grill &amp; Chill Restaurant</strong>. How can I help you? Would you like recommendations, deals, or table reservation assistance?
+            </div>
+          </div>
+        </div>
+
+        <div class="px-2 py-1 bg-gray-100 flex gap-1 overflow-x-auto no-scrollbar text-[10px]">
+          <button onclick="window.sendPresetChat('What is today special?')" class="bg-white border border-gray-200 px-2 py-0.5 rounded-full whitespace-nowrap cursor-pointer">🔥 Today's Special</button>
+          <button onclick="window.sendPresetChat('Tell me about burgers')" class="bg-white border border-gray-200 px-2 py-0.5 rounded-full whitespace-nowrap cursor-pointer">🍔 Burgers</button>
+          <button onclick="window.sendPresetChat('Book table for 2')" class="bg-white border border-gray-200 px-2 py-0.5 rounded-full whitespace-nowrap cursor-pointer">📅 Book Table</button>
+        </div>
+
+        <form onsubmit="window.handleChatSubmit(event)" class="p-2.5 bg-white border-t border-gray-200 flex gap-2">
+          <input id="chat-user-input" type="text" placeholder="Type a message..." class="flex-1 bg-gray-100 px-3 py-1.5 rounded-full text-xs text-gray-800 focus:outline-none" />
+          <button type="submit" class="w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center cursor-pointer shadow-sm">
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- QR CODE SCANNER MODAL -->
+    <div id="qr-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeQRScannerModal()"></div>
+      <div class="relative bg-white rounded-3xl max-w-xs w-full p-5 text-center shadow-2xl border border-gray-100 z-10 text-xs">
+        <i class="fa-solid fa-qrcode text-3xl text-amber-500 mb-2"></i>
+        <h3 class="font-bold text-gray-900 text-base">Scan Table QR</h3>
+        <p class="text-gray-500 text-[11px] mt-0.5">Scan your dining table code to place food orders right from your phone.</p>
+        <div class="my-4 w-36 h-36 mx-auto border-2 border-dashed border-amber-400 rounded-2xl flex items-center justify-center bg-gray-900">
+          <i class="fa-solid fa-camera text-gray-400 text-2xl"></i>
+        </div>
+        <button onclick="window.simulateQRSuccess()" class="w-full bg-[#f59e0b] hover:bg-amber-300 text-black font-bold py-2 rounded-xl cursor-pointer">
+          Simulate Table #7 Scanned
+        </button>
+      </div>
+    </div>
+
+
+    <!-- MAP MODAL -->
+    <div id="map-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeMapModal()"></div>
+      <div class="relative bg-white rounded-3xl max-w-lg w-full p-5 shadow-2xl border border-gray-100 z-10 text-xs">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-location-dot text-red-600 text-base"></i>
+            <h3 class="font-bold text-sm text-gray-900">Grill &amp; Chill Restaurant Location</h3>
+          </div>
+          <button onclick="window.closeMapModal()" class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 cursor-pointer">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+        <div class="my-3 rounded-2xl overflow-hidden border border-gray-200 h-56 relative bg-gray-100">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=700&q=80" alt="Map" class="w-full h-full object-cover filter brightness-90" />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-black/85 text-white p-2.5 rounded-xl border border-amber-400 flex items-center gap-2 shadow-xl">
+              <i class="fa-solid fa-location-dot text-red-500 text-lg animate-bounce"></i>
+              <div>
+                <p class="font-bold text-xs">123 Food Street, Dhaka-1205</p>
+                <p class="text-[10px] text-amber-400">Open Daily: 10:00 AM - 11:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button onclick="window.openGoogleMapsDemo()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl cursor-pointer">
+          Open Directions in Maps
+        </button>
+      </div>
+    </div>
+
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="fixed top-12 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <script>
+      let cart = [
+        {
+          id: '1',
+          title: 'Margherita Pizza',
+          price: 12.99,
+          quantity: 1,
+          image: 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=500&q=80'
+        },
+        {
+          id: '2',
+          title: 'Classic Burger',
+          price: 8.99,
+          quantity: 1,
+          image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=500&q=80'
+        }
+      ];
+
+      let favoriteItems = new Set();
+      let activeCategoryFilter = null;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+        setupSearchListeners();
+      });
+
+      window.setViewMode = (mode) => {
+        const viewport = document.getElementById('presentation-viewport');
+        const phoneStatusBar = document.getElementById('phone-status-bar');
+        const desktopBtn = document.getElementById('view-desktop-btn');
+        const mobileBtn = document.getElementById('view-mobile-btn');
+        const desktopSearch = document.getElementById('desktop-search-bar');
+        const mobileSearch = document.getElementById('mobile-search-bar');
+        const desktopNav = document.getElementById('desktop-nav');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileBottomNav = document.getElementById('mobile-bottom-nav');
+
+        if (!viewport || !desktopBtn || !mobileBtn) return;
+
+        if (mode === 'mobile') {
+          viewport.className = 'max-w-[412px] my-6 mx-auto rounded-[46px] border-[10px] border-[#22242a] shadow-[0_30px_90px_rgba(0,0,0,0.85)] overflow-hidden transition-all duration-300 relative';
+          phoneStatusBar?.classList.remove('hidden');
+          phoneStatusBar?.classList.add('flex');
+
+          desktopBtn.className = 'px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold flex items-center gap-1.5 transition-all cursor-pointer';
+          mobileBtn.className = 'px-3 py-1 rounded-full bg-[#f59e0b] text-black font-extrabold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer';
+
+          if (desktopSearch) desktopSearch.classList.add('hidden');
+          if (mobileSearch) {
+            mobileSearch.classList.remove('hidden');
+            mobileSearch.classList.add('flex');
+          }
+
+          if (desktopNav) desktopNav.classList.add('hidden');
+          if (mobileMenuBtn) mobileMenuBtn.classList.remove('hidden');
+          if (mobileBottomNav) {
+            mobileBottomNav.classList.remove('hidden');
+            mobileBottomNav.classList.add('fixed');
+          }
+
+          showToast('Switched to Mobile App Frame (Matches Image 1)', 'info');
+        } else {
+          viewport.className = 'w-full my-0 mx-auto transition-all duration-300';
+          phoneStatusBar?.classList.add('hidden');
+          phoneStatusBar?.classList.remove('flex');
+
+          desktopBtn.className = 'px-3 py-1 rounded-full bg-[#f59e0b] text-black font-extrabold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer';
+          mobileBtn.className = 'px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold flex items-center gap-1.5 transition-all cursor-pointer';
+
+          if (desktopSearch) desktopSearch.classList.remove('hidden');
+          if (mobileSearch) mobileSearch.classList.add('hidden');
+
+          if (desktopNav) desktopNav.classList.remove('hidden');
+          if (mobileBottomNav) mobileBottomNav.classList.add('hidden');
+
+          showToast('Switched to Full Desktop View (Matches Image 2)', 'info');
+        }
+      };
+
+      function setupSearchListeners() {
+        const desktopInput = document.getElementById('food-search-desktop');
+        const mobileInput = document.getElementById('food-search-mobile');
+
+        if (desktopInput) {
+          desktopInput.addEventListener('input', (e) => {
+            filterFoods(e.target.value.toLowerCase().trim(), activeCategoryFilter);
+          });
+        }
+
+        if (mobileInput) {
+          mobileInput.addEventListener('input', (e) => {
+            filterFoods(e.target.value.toLowerCase().trim(), activeCategoryFilter);
+          });
+        }
+      }
+
+      window.triggerSearch = (source) => {
+        const input = document.getElementById(source === 'desktop' ? 'food-search-desktop' : 'food-search-mobile');
+        const query = input ? input.value.toLowerCase().trim() : '';
+        filterFoods(query, activeCategoryFilter);
+        document.getElementById('popular-foods')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      function filterFoods(query, category) {
+        const cards = document.querySelectorAll('.food-card');
+        const noFoods = document.getElementById('no-foods-found');
+        let count = 0;
+
+        cards.forEach((card) => {
+          const title = card.getAttribute('data-title')?.toLowerCase() || '';
+          const cat = card.getAttribute('data-category')?.toLowerCase() || '';
+          const matchesQuery = !query || title.includes(query) || cat.includes(query);
+          const matchesCategory = !category || cat === category.toLowerCase();
+
+          if (matchesQuery && matchesCategory) {
+            card.style.display = 'flex';
+            count++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (noFoods) noFoods.style.display = count === 0 ? 'block' : 'none';
+      }
+
+      window.filterCategory = (categoryName) => {
+        activeCategoryFilter = categoryName;
+
+        document.querySelectorAll('.category-pill').forEach((pill) => {
+          const cat = pill.getAttribute('data-cat');
+          const imgWrapper = pill.querySelector('div');
+          if (cat === categoryName) {
+            imgWrapper?.classList.add('border-amber-400', 'ring-2', 'ring-amber-400', 'scale-105');
+          } else {
+            imgWrapper?.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'scale-105');
+          }
+        });
+
+        const filterStatus = document.getElementById('filter-status');
+        const currentFilterName = document.getElementById('current-filter-name');
+        if (filterStatus && currentFilterName) {
+          filterStatus.classList.remove('hidden');
+          filterStatus.classList.add('flex');
+          currentFilterName.textContent = categoryName;
+        }
+
+        filterFoods('', categoryName);
+        document.getElementById('popular-foods')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.resetCategoryFilter = () => {
+        activeCategoryFilter = null;
+        document.getElementById('filter-status')?.classList.remove('flex');
+        document.getElementById('filter-status')?.classList.add('hidden');
+
+        document.querySelectorAll('.category-pill div').forEach((div) => {
+          div.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'scale-105');
+        });
+
+        filterFoods('', null);
+      };
+
+      window.resetSearch = () => {
+        const desktopInput = document.getElementById('food-search-desktop');
+        const mobileInput = document.getElementById('food-search-mobile');
+        if (desktopInput) desktopInput.value = '';
+        if (mobileInput) mobileInput.value = '';
+        window.resetCategoryFilter();
+      };
+
+      window.toggleWishlist = (btn, foodTitle) => {
+        const icon = btn.querySelector('i');
+        if (favoriteItems.has(foodTitle)) {
+          favoriteItems.delete(foodTitle);
+          icon?.classList.remove('fa-solid', 'text-red-500');
+          icon?.classList.add('fa-regular');
+          showToast(`Removed "${foodTitle}" from favorites`, 'info');
+        } else {
+          favoriteItems.add(foodTitle);
+          icon?.classList.remove('fa-regular');
+          icon?.classList.add('fa-solid', 'text-red-500');
+          showToast(`Saved "${foodTitle}" to favorites! ❤️`, 'success');
+        }
+        const favCount = document.getElementById('fav-count');
+        if (favCount) favCount.textContent = favoriteItems.size.toString();
+      };
+
+      window.filterFavorites = () => {
+        if (favoriteItems.size === 0) {
+          showToast('Click the heart on any food card to add to favorites!', 'info');
+          return;
+        }
+
+        const cards = document.querySelectorAll('.food-card');
+        cards.forEach((card) => {
+          const title = card.getAttribute('data-title') || '';
+          card.style.display = favoriteItems.has(title) ? 'flex' : 'none';
+        });
+
+        const filterStatus = document.getElementById('filter-status');
+        const currentFilterName = document.getElementById('current-filter-name');
+        if (filterStatus && currentFilterName) {
+          filterStatus.classList.remove('hidden');
+          filterStatus.classList.add('flex');
+          currentFilterName.textContent = `Favorites (${favoriteItems.size})`;
+        }
+
+        document.getElementById('popular-foods')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.openCartDrawer = () => {
+        const backdrop = document.getElementById('cart-drawer-backdrop');
+        const drawer = document.getElementById('cart-drawer');
+        if (backdrop && drawer) {
+          backdrop.classList.remove('hidden');
+          setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+            drawer.classList.remove('translate-x-full');
+            drawer.classList.add('translate-x-0');
+          }, 10);
+        }
+      };
+
+      window.closeCartDrawer = () => {
+        const backdrop = document.getElementById('cart-drawer-backdrop');
+        const drawer = document.getElementById('cart-drawer');
+        if (backdrop && drawer) {
+          backdrop.classList.remove('opacity-100');
+          backdrop.classList.add('opacity-0');
+          drawer.classList.remove('translate-x-0');
+          drawer.classList.add('translate-x-full');
+          setTimeout(() => backdrop.classList.add('hidden'), 300);
+        }
+      };
+
+      window.addToCart = (title, price, image) => {
+        const existing = cart.find(item => item.title === title);
+        if (existing) {
+          existing.quantity++;
+        } else {
+          cart.push({ id: Date.now().toString(), title, price, quantity: 1, image });
+        }
+        renderCart();
+        showToast(`Added 1x "${title}" to Cart!`, 'success');
+      };
+
+      window.updateQuantity = (id, delta) => {
+        const itemIndex = cart.findIndex(i => i.id === id);
+        if (itemIndex > -1) {
+          cart[itemIndex].quantity += delta;
+          if (cart[itemIndex].quantity <= 0) cart.splice(itemIndex, 1);
+        }
+        renderCart();
+      };
+
+      window.removeFromCart = (id) => {
+        cart = cart.filter(i => i.id !== id);
+        renderCart();
+        showToast('Item removed from order', 'info');
+      };
+
+      function renderCart() {
+        const list = document.getElementById('cart-items-list');
+        const badge = document.getElementById('cart-badge');
+        const countSpan = document.getElementById('drawer-item-count');
+        const subtotalEl = document.getElementById('cart-subtotal');
+        const taxEl = document.getElementById('cart-tax');
+        const totalEl = document.getElementById('cart-total');
+        const demoCartTotal = document.getElementById('demo-cart-total');
+
+        const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+
+        if (badge) badge.textContent = totalQuantity.toString();
+        if (countSpan) countSpan.textContent = `${totalQuantity} item${totalQuantity === 1 ? '' : 's'}`;
+        if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+        if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
+        if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+        if (demoCartTotal) demoCartTotal.textContent = `$${total.toFixed(2)}`;
+
+        if (!list) return;
+
+        if (cart.length === 0) {
+          list.innerHTML = `
+            <div class="text-center py-12 space-y-2">
+              <i class="fa-solid fa-cart-shopping text-3xl text-gray-300"></i>
+              <p class="font-bold text-gray-800 text-sm">Your Cart is empty</p>
+              <p class="text-xs text-gray-500">Add dishes to start ordering!</p>
+            </div>
+          `;
+          return;
+        }
+
+        list.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-gray-100 shadow-xs">
+            <img src="${item.image}" alt="${item.title}" class="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-xs text-gray-900 truncate">${item.title}</h4>
+              <p class="text-[11px] text-[#f59e0b] font-black mt-0.5">$${item.price.toFixed(2)}</p>
+              <div class="flex items-center gap-2 mt-1.5">
+                <div class="flex items-center border border-gray-200 rounded-md overflow-hidden bg-gray-50 text-[11px]">
+                  <button onclick="window.updateQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center hover:bg-gray-200 font-bold cursor-pointer">-</button>
+                  <span class="w-6 text-center font-bold text-gray-800">${item.quantity}</span>
+                  <button onclick="window.updateQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center hover:bg-gray-200 font-bold cursor-pointer">+</button>
+                </div>
+                <span class="text-[11px] font-semibold text-gray-600">= $${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            </div>
+            <button onclick="window.removeFromCart('${item.id}')" class="text-gray-400 hover:text-red-500 p-1.5 cursor-pointer">
+              <i class="fa-solid fa-trash-can text-xs"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      window.proceedToCheckout = () => {
+        if (cart.length === 0) {
+          showToast('Your cart is empty! Please add items first.', 'warning');
+          return;
+        }
+        window.closeCartDrawer();
+        showToast('🎉 Order #GC-9821 successfully placed! Kitchen is preparing your meal.', 'success');
+      };
+
+      window.openBookTableModal = () => document.getElementById('book-table-modal')?.classList.remove('hidden');
+      window.closeBookTableModal = () => document.getElementById('book-table-modal')?.classList.add('hidden');
+      window.handleReservation = (e) => {
+        e.preventDefault();
+        window.closeBookTableModal();
+        showToast('🎉 Table successfully reserved! Confirmation SMS sent.', 'success');
+      };
+
+      window.openOfflineModal = (foodTitle) => {
+        const titleEl = document.getElementById('offline-item-title');
+        if (titleEl) titleEl.textContent = foodTitle;
+        document.getElementById('offline-order-modal')?.classList.remove('hidden');
+      };
+      window.closeOfflineModal = () => document.getElementById('offline-order-modal')?.classList.add('hidden');
+      window.confirmOfflineOrder = (type) => {
+        window.closeOfflineModal();
+        showToast(`Ordered successfully for ${type}! Ticket #OFF-441.`, 'success');
+      };
+
+      window.claimOffer = () => {
+        window.addToCart('Woodfired Special Pizza', 9.99, 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80');
+        showToast('50% OFF promo applied to Special Pizza!', 'success');
+        window.openCartDrawer();
+      };
+
+      let aiCardVisible = true;
+      window.toggleAISupportCard = () => {
+        const card = document.getElementById('ai-support-card');
+        if (!card) return;
+        aiCardVisible = !aiCardVisible;
+        if (aiCardVisible) {
+          card.classList.remove('hidden', 'scale-0', 'opacity-0');
+          card.classList.add('scale-100', 'opacity-100');
+        } else {
+          card.classList.add('scale-0', 'opacity-0');
+          setTimeout(() => card.classList.add('hidden'), 200);
+        }
+      };
+
+      window.openAIChatModal = () => document.getElementById('ai-chat-modal')?.classList.remove('hidden');
+      window.closeAIChatModal = () => document.getElementById('ai-chat-modal')?.classList.add('hidden');
+      window.sendPresetChat = (text) => {
+        const input = document.getElementById('chat-user-input');
+        if (input) {
+          input.value = text;
+          window.handleChatSubmit(new Event('submit'));
+        }
+      };
+
+      window.handleChatSubmit = (e) => {
+        e.preventDefault();
+        const input = document.getElementById('chat-user-input');
+        if (!input || !input.value.trim()) return;
+
+        const userText = input.value.trim();
+        input.value = '';
+        appendChatMessage('user', userText);
+
+        setTimeout(() => {
+          let reply = "I'd be glad to help! Our chefs recommend our signature Margherita Pizza and the Supreme Classic Burger with golden french fries!";
+          const lower = userText.toLowerCase();
+          if (lower.includes('special') || lower.includes('deal') || lower.includes('50%')) {
+            reply = "Today's highlight is our 50% OFF Special Italian Pizza offer! Click the arrow on the Special Offer banner to claim it now.";
+          } else if (lower.includes('burger')) {
+            reply = "Our Classic Burger is 100% Halal beef, flame-grilled with cheddar cheese and fresh lettuce for only $8.99!";
+          } else if (lower.includes('book') || lower.includes('table')) {
+            reply = "You can book a cozy table directly via the 'Book a Table' button on the top banner! Would you prefer indoor or rooftop terrace?";
+          }
+          appendChatMessage('ai', reply);
+        }, 600);
+      };
+
+      function appendChatMessage(sender, message) {
+        const container = document.getElementById('chat-messages');
+        if (!container) return;
+        const isUser = sender === 'user';
+        const msgEl = document.createElement('div');
+        msgEl.className = `flex items-start gap-2 ${isUser ? 'justify-end' : ''}`;
+        msgEl.innerHTML = isUser
+          ? `<div class="bg-blue-600 text-white p-2.5 rounded-2xl rounded-tr-none text-xs max-w-[80%] shadow-xs">${message}</div>`
+          : `<div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-[9px]">AI</div><div class="bg-white p-2.5 rounded-2xl rounded-tl-none border border-gray-200 shadow-xs text-gray-700 max-w-[80%]">${message}</div>`;
+        container.appendChild(msgEl);
+        container.scrollTop = container.scrollHeight;
+      }
+
+      window.openQRScannerModal = () => document.getElementById('qr-modal')?.classList.remove('hidden');
+      window.closeQRScannerModal = () => document.getElementById('qr-modal')?.classList.add('hidden');
+      window.simulateQRSuccess = () => {
+        window.closeQRScannerModal();
+        showToast('Table #7 linked! Your order will be served directly to your table.', 'success');
+      };
+
+      window.openMapModal = () => document.getElementById('map-modal')?.classList.remove('hidden');
+      window.closeMapModal = () => document.getElementById('map-modal')?.classList.add('hidden');
+      window.openGoogleMapsDemo = () => window.open('https://maps.google.com/?q=123+Food+Street+Dhaka', '_blank');
+
+      window.openOrdersModal = () => window.openCartDrawer();
+      window.openGiftModal = () => showToast('🎁 Gift voucher code "GRILL50" copied to clipboard!', 'info');
+      window.openGalleryModal = () => showToast('Viewing Grill & Chill Chef Photo Gallery', 'info');
+      window.openAboutModal = () => showToast('Grill & Chill was founded in 2018. Over 50,000+ happy customers served!', 'info');
+      window.toggleMobileMenu = () => document.getElementById('mobile-menu')?.classList.toggle('hidden');
+
+      window.handleNewsletter = (e) => {
+        e.preventDefault();
+        showToast('Thank you! Discount voucher sent to your email.', 'success');
+        e.target.reset();
+      };
+
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `pointer-events-auto transform transition-all duration-300 translate-y-2 opacity-0 flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl shadow-xl text-xs font-semibold max-w-sm border backdrop-blur-md ${
+          type === 'success'
+            ? 'bg-gray-900/95 text-white border-amber-400/40'
+            : type === 'warning'
+            ? 'bg-amber-600 text-white border-amber-500'
+            : 'bg-blue-900/95 text-white border-blue-400/40'
+        }`;
+
+        const iconClass = type === 'success' ? 'fa-circle-check text-[#f59e0b]' : type === 'warning' ? 'fa-triangle-exclamation text-white' : 'fa-circle-info text-sky-400';
+        toast.innerHTML = `<i class="fa-solid ${iconClass} text-sm flex-shrink-0"></i><span class="flex-1 leading-snug">${message}</span>`;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-2', 'opacity-0');
+          toast.classList.add('translate-y-0', 'opacity-100');
+        }, 10);
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-2', 'opacity-0');
+          setTimeout(() => toast.remove(), 300);
+        }, 3500);
+      }
+    </script>
+  </body>
+</html>
